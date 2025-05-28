@@ -15,8 +15,7 @@ class VigenereCipher:
                 key_index += 1
             else:
                 encrypted_text += char
-        return encrypted_text
-
+        return encrypted_text        
     def vigenere_decrypt(self, encrypted_text, key):
         decrypted_text = ""
         key_index = 0

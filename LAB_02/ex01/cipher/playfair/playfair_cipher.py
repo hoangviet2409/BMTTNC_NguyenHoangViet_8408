@@ -52,13 +52,12 @@ class PlayFairCipher:
 
     def playfair_decrypt(self, cipher_text, matrix):
         cipher_text = cipher_text.upper()
-        decrypted_text = ""
+        decrypted_text =""
 
         for i in range(0, len(cipher_text), 2):
             pair = cipher_text[i:i+2]
             row1, col1 = self.find_letter_coords(matrix, pair[0])
             row2, col2 = self.find_letter_coords(matrix, pair[1])
-
             if row1 == row2:
                 decrypted_text += matrix[row1][(col1 - 1) % 5] + matrix[row2][(col2 - 1) % 5]
             elif col1 == col2:
@@ -66,17 +65,18 @@ class PlayFairCipher:
             else:
                 decrypted_text += matrix[row1][col2] + matrix[row2][col1]
 
-        # Loại bỏ ký tự "X" nếu nó là ký tự cuối cùng và là ký tự được thêm vào
+        # Loại bỏ ký tự "X" nếu nó là ký tự cuối cùng và được thêm vào
+        banro = ""
+
         for i in range(0, len(decrypted_text)-2, 2):
             if decrypted_text[i] == decrypted_text[i+2]:
-                banno = decrypted_text[i]
+                banro += decrypted_text[i]
             else:
-                banno = decrypted_text[i] + " " + decrypted_text[i+1]
+                banro += decrypted_text[i] + "" + decrypted_text[i+1]
 
-            if decrypted_text[-1] == "X":
-                banno += decrypted_text[-2]
-            else:
-                banno += decrypted_text[-2]
-                banno += decrypted_text[-1]
-
-        return banno
+        if decrypted_text[-1] == "X":
+            banro += decrypted_text[-2]
+        else:
+            banro += decrypted_text[-2]
+            banro += decrypted_text[-1]
+        return banro
